@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-Copyright 2018 Google LLC
+Copyright 2021 CloudSEN12 team
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -20,17 +20,26 @@ limitations under the License.
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+<script src="https://use.fontawesome.com/0adc4d4ec5.js"></script>
 
 <script src="ga.js"></script>
-<title>MannequinChallenge: A Dataset of Frozen People</title>
-
+<title>CloudSEN12: A Benchmark Dataset for Cloud Semantic Understanding</title>
+fa-download
 <!-- Top  -->
 <div class=top>
-  <span class=title>MannequinChallenge</span>
+  <a href=index.html>
+    <i class="fa fa-home" aria-hidden="true"></i>
+    <span class=title href=index.html>CloudSEN12</span>
+  </a>
   <div class=right>
-    <a href=index.html>Home</a>
-    <a href=download.html>Download</a>
-    <a href=people.html>Team</a>
+    <a class="nav-link" href="map.html">
+      <i class="fa fa-map" aria-hidden="true"></i> Map
+    </a>    
+    <a href=download.html> <i class="fa fa-download" aria-hidden="true"></i> Download</a>
+    <a href=people.html> <i class="fa fa-users" aria-hidden="true"></i> Team</a>
+    <a class="nav-link" href="repository.html">
+      <i class="fa fa-github" aria-hidden="true"></i> Repository
+    </a>    
   </div>
 </div>
 
@@ -38,8 +47,8 @@ limitations under the License.
   <br>
   <br>
 	  <div class="textblock" align="center">
-		   <h1>MannequinChallenge</h1>
-		   <h4>A Dataset of Frozen People</h4>
+		   <h1>CloudSEN12</h1>
+		   <h4>A Benchmark Dataset for Cloud Semantic Understanding</h4>
 		   <p>&nbsp;</p>
     </div>
   <div class="textblock">
@@ -70,15 +79,6 @@ limitations under the License.
     <a href="http://github.com/google/mannequinchallenge"><button class="button">Download Code</button></a>
   </div>
  </div>
-</div>
-<div class=bottom>
-  <img src="https://www.gstatic.com/images/branding/googlelogo/2x/googlelogo_dark_color_42x16dp.png" alt="Google">
-  <div class=right>
-    <a href="https://www.google.com/">Google</a>
-    <a href="https://www.google.com/intl/en/about/">About Google</a>
-    <a href="https://www.google.com/intl/en/policies/privacy/">Privacy</a>
-    <a href="https://www.google.com/intl/en/policies/terms/">Terms</a>
-  </div>
 </div>
 <script>
   $(document).ready(function(){
