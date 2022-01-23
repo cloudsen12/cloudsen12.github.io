@@ -90,12 +90,11 @@ a img {
 }
 
 .top {
-  background-color: #343a3d; /* blue */
-  box-shadow: 2px 0 5px #2c3539;
+  background-color: #044266; /* blue */
   height: 80px;
   color: white;
   font-family: 'Google Sans', sans-serif;
-  position: fixed;
+  position: fixed;  
   top: 0;
   left: 0;
   width: 100%;
@@ -257,7 +256,7 @@ h4 {
 }
 
 .button {
-  background-color: #4285f4; /* blue */
+  background-color: #044266; /* blue */
   border: none;
   color: white;
   cursor: pointer;

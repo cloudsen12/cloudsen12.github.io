@@ -35,93 +35,94 @@ limitations under the License.
     </a>    
     <a href=download.html> <i class="fa fa-download" aria-hidden="true"></i> Download</a>
     <a href=people.html> <i class="fa fa-users" aria-hidden="true"></i> Team</a>
-    <a class="nav-link" href="https://github.com/cloudsen12">
+    <a class="nav-link" href="repository.html">
       <i class="fa fa-github" aria-hidden="true"></i> Repository
     </a>    
   </div>
 </div>
 
+<!-- DATASET -->
 <div class=alt-content>
 <div class=section>
-<h3>Download (v1.0)</h3>
+<a href="https://github.com/cloudsen12/dataset" class="ref"><h3>cloudSEN12/<b>dataset</b></h3></a>
 <div class=textblock>
 <p>
-The MannequinChallenge data can be downloaded here: <a href="https://storage.googleapis.com/mannequinchallenge-data/MannequinChallenge.tar"
-  download="MannequinChallenge.tar"
-  onclick="ga('send', 'event', 'Files', 'click', 'MannequinChallenge)">MannequinChallenge.tar</a> (40MB)
+This <b><a href=https://github.com/cloudsen12/dataset>repository</a></b> contains the code used to create cloudSEN12. 
+It was written entirely in R using rgee to connect to Google Earth Engine, and stars and dplyr for data wrangling. The code is licensed
+by CloudSEN12 team under an <a href="https://opensource.org/licenses/MIT">MIT License.</a>
+</div>
+</div>
 
-<p>The data consists of a set of .txt files, one for each video
-clip, specifying timestamps and poses for frames in that clip.
-<p>
-This data is licensed by Google LLC under a
-<a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons
-Attribution 4.0 International License.</a>
-</div>
-</div>
+<!-- Models -->
 
 <div class=section>
-<h3>Dataset Design</h3>
-<div class=textblock><p>
-The data is split into <b>train</b>, <b>validation</b> and <b>test</b>
-subdirectories, each with a set of .txt files, one .txt file for each
-video clip. The format of each .txt file is as follows:
-<div class=mono>
-&lt;Video URL&gt;<br>
-&lt;frame1&gt;<br>
-&lt;frame2&gt;<br>
-&lt;...&gt;
+<a href="https://github.com/cloudsen12/models" class="ref"><h3>cloudSEN12/<b>models</b></h3></a>
+<div class=textblock>
+<p>
+This <b><a href=https://github.com/cloudsen12/models>repository</a></b> contains the docker image used to run Fmask Matlab software 
+and <b><a href=https://github.com/IPL-UV/DL-L8S2-UV>DL-L8S2-UV</a></b>. The code is licensed by CloudSEN12 team under an 
+<a href="https://opensource.org/licenses/MIT">MIT License.</a>
 </div>
-<p>
-where each <b>frame line</b> has the following 19 columns:
-<div class=mono>
-&nbsp;&nbsp;&nbsp;1. <b>timestamp</b><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int: microseconds since start of video<br>
-<br>
-&nbsp;2-7. <b>camera intrinsics</b><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float: focal_length_x, focal_length_y,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;principal_point_x, principal_point_y,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;two radial distortion coefficients (always 0.0)<br>
-<br>
-8-19. <b>camera pose</b><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;floats forming 3x4 matrix in row-major order
 </div>
-<p>
-The camera intrinsics can be organized into a 3x3 matrix <b>K</b> and
-the camera pose parameters into a 3x4 matrix
-<span class=nobreak><b>P</b> = [ <b>R</b> | <b>t</b> ],</span>
-such that the matrix <b>KP</b> maps a (homogeneous) 3D
-point <b>p</b> in a world coordinate frame to a (homogeneous) 2D point
-in the image.
-<p>
-The camera intrinsics are expressed in
-resolution-independent <b>normalized image coordinates</b>, where the
-top left corner of the image is (0,0), and the bottom right corner of
-the image is (1,1). This allows for the intrinsic parameters to be
-applied to frames at whatever resolution they are represented on disk
-(or resized to prior to training), by scaling them according to the
-image size in pixels. For an image of resolution <i>width</i>
-x <i>height</i> pixels, the intrinsics matrix at the actual scale of the
-image is
-<p>
-  <div class=equation>
-    K = <div class=lbrack></div>
-    <table class=inline>
-      <tr>
-        <td>width &middot; focal_length_x</td>
-        <td>0</td>
-        <td>width &middot; principal_point_x</td>
-     </tr>
-     <tr>
-       <td>0</td>
-       <td>height &middot; focal_length_y</td>
-       <td>height &middot; principal_point_y</td>
-     </tr>
-     <tr>
-       <td>0</td>
-       <td>0</td>
-       <td>1</td>
-     </tr>
-    </table><div class=rbrack></div>
-  </div>
+
+
+<!-- cloudApp -->
+
+<div class=section>
+  <a href="https://github.com/cloudsen12/CloudApp" class="ref"><h3>cloudSEN12/<b>CloudApp</b></h3></a>  
+  <div class=textblock>
+  <p>
+  This <b><a href=https://github.com/cloudsen12/CloudApp>repository</a></b> contains the Javascript code to build the CloudApp Earth Engine App. 
+  Click <a href=https://csaybar.users.earthengine.app/view/cloudapp>here</a> to display our live demo. The code is licensed by CloudSEN12 team under 
+  an <a href="https://opensource.org/licenses/MIT">MIT License.</a>  
+</div>  
 </div>
+
+
+
+<!-- Figures -->
+
+<div class=section>
+  <a href="https://github.com/cloudsen12/Figures" class="ref"><h3>cloudSEN12/<b>Figures</b></h3></a>    
+  <div class=textblock>
+  <p>    
+  This <b><a href=https://github.com/cloudsen12/figures>repository</a></b> contains the scripts for reproducing the paper figures. The code is
+  licensed by CloudSEN12 team under an <a href="https://opensource.org/licenses/MIT">MIT License.</a>    
+</div>  
+</div>
+
+
+<!-- Benchmark -->
+
+<div class=section>
+  <a href="https://github.com/cloudsen12/benchmark" class="ref"><h3>cloudSEN12/<b>benchmark</b></h3></a>    
+  <div class=textblock>
+  <p>
+  This <b><a href=https://github.com/cloudsen12/benchmark>repository</a></b> contains the pre-trained models as well as the code 
+  needed to train and test a multiclass U-net model in cloudSEN12. The code is licensed by CloudSEN12 team under an <a href="https://opensource.org/licenses/MIT">MIT License.</a>    
+</div>  
+</div>
+
+<!-- Iris -->
+
+<div class=section>
+  <a href="https://github.com/cloudsen12/iris" class="ref"><h3>cloudSEN12/<b>iris</b></h3></a>      
+  <div class=textblock>
+  <p>
+    This <b><a href=https://github.com/cloudsen12/iris>repository</a></b> contains the IRIS (Intelligence foR Image Segmentation) active
+    learning tool. Click <a href=https://csaybar.users.earthengine.app/view/cloudapp>here</a> to display a live demo. This fantastic software
+    has been created by <a href=https://github.com/JohnMrziglod>JohnMrziglod</a> and <a href=https://github.com/JohnMrziglod>aliFrancis</a>. The
+    code is licensed by ESA-PhiLab under a <a href="https://github.com/ESA-PhiLab/iris/blob/master/LICENSE">GNU General Public License v3.0.</a>    
+</div>  
+</div>
+
+<!-- Website -->
+
+<div class=section>
+  <a href="https://github.com/cloudsen12/cloudsen12.github.io" class="ref"><h3>cloudSEN12/<b>website</b></h3></a>        
+  <div class=textblock>
+  <p>
+    This <b><a href=https://github.com/cloudsen12/cloudsen12.github.io>repository</a></b> contains the code to deploy this website. The code is
+    licensed by CloudSEN12 team under an <a href="https://opensource.org/licenses/MIT">MIT License.</a>        
+</div>  
 </div>
