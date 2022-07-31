@@ -46,93 +46,36 @@ limitations under the License.
 <h3>Download (v1.0)</h3>
 <div class=textblock>
 <p>
-The MannequinChallenge data can be downloaded here: <a href="https://storage.googleapis.com/mannequinchallenge-data/MannequinChallenge.tar"
-  download="MannequinChallenge.tar"
-  onclick="ga('send', 'event', 'Files', 'click', 'MannequinChallenge)">MannequinChallenge.tar</a> (40MB)
+CloudSEN12 can be downloaded here: <a href="https://doi.org/10.34911/rdnt.y3xeg3">https://doi.org/10.34911/rdnt.y3xeg3.</a>
 
-<p>The data consists of a set of .txt files, one for each video
-clip, specifying timestamps and poses for frames in that clip.
 <p>
-This data is licensed by Google LLC under a
-<a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons
-Attribution 4.0 International License.</a>
+The dataset is delivered in the form of LZW-compressed COG (<a href="https://www.cogeo.org/">Cloud Optimized GeoTIFF</a>) 
+files using the <a href="https://stacspec.org/en"> STAC specification</a>. 
+<br><br>
+STAC provides a straightforward architecture 
+for reading metadata and assets in JSON format, providing users with a sophisticated browsing experience 
+that seamlessly integrates with modern scripting languages and front-end web technologies. This data is 
+licensed by CloudSEN12 team under a <a href="http://creativecommons.org/licenses/by/4.0/">
+Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0).</a>
 </div>
 </div>
 
 <div class=section>
-<h3>Dataset Design</h3>
-<div class=textblock><p>
-The data is split into <b>train</b>, <b>validation</b> and <b>test</b>
-subdirectories, each with a set of .txt files, one .txt file for each
-video clip. The format of each .txt file is as follows:
-<div class=mono>
-&lt;Video URL&gt;<br>
-&lt;frame1&gt;<br>
-&lt;frame2&gt;<br>
-&lt;...&gt;
-</div>
-<p>
-where each <b>frame line</b> has the following 19 columns:
-<div class=mono>
-&nbsp;&nbsp;&nbsp;1. <b>timestamp</b><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int: microseconds since start of video<br>
-<br>
-&nbsp;2-7. <b>camera intrinsics</b><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float: focal_length_x, focal_length_y,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;principal_point_x, principal_point_y,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;two radial distortion coefficients (always 0.0)<br>
-<br>
-8-19. <b>camera pose</b><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;floats forming 3x4 matrix in row-major order
-</div>
-<p>
-The camera intrinsics can be organized into a 3x3 matrix <b>K</b> and
-the camera pose parameters into a 3x4 matrix
-<span class=nobreak><b>P</b> = [ <b>R</b> | <b>t</b> ],</span>
-such that the matrix <b>KP</b> maps a (homogeneous) 3D
-point <b>p</b> in a world coordinate frame to a (homogeneous) 2D point
-in the image.
-<p>
-The camera intrinsics are expressed in
-resolution-independent <b>normalized image coordinates</b>, where the
-top left corner of the image is (0,0), and the bottom right corner of
-the image is (1,1). This allows for the intrinsic parameters to be
-applied to frames at whatever resolution they are represented on disk
-(or resized to prior to training), by scaling them according to the
-image size in pixels. For an image of resolution <i>width</i>
-x <i>height</i> pixels, the intrinsics matrix at the actual scale of the
-image is
-<p>
-  <div class=equation>
-    K = <div class=lbrack></div>
-    <table class=inline>
-      <tr>
-        <td>width &middot; focal_length_x</td>
-        <td>0</td>
-        <td>width &middot; principal_point_x</td>
-     </tr>
-     <tr>
-       <td>0</td>
-       <td>height &middot; focal_length_y</td>
-       <td>height &middot; principal_point_y</td>
-     </tr>
-     <tr>
-       <td>0</td>
-       <td>0</td>
-       <td>1</td>
-     </tr>
-    </table><div class=rbrack></div>
-  </div>
-</div>
-</div>
+  <h3>Dataset Design</h3>
+  <div class=textblock><p>
+    We defined an IP as the primary atomic unit, representing a single spatio-temporal 
+    component. Each IP has 49 assets and 31 properties. CloudSEN12 assets, as seen in Figure
+    below, are organized into four levels. The top-level includes three folders: high, scribble, 
+    and no-label.
 
-</div>
-<div class=bottom>
-  <img src="https://www.gstatic.com/images/branding/googlelogo/2x/googlelogo_dark_color_42x16dp.png" alt="Google">
-  <div class=right>
-    <a href="https://www.google.com/">Google</a>
-    <a href="https://www.google.com/intl/en/about/">About Google</a>
-    <a href="https://www.google.com/intl/en/policies/privacy/">Privacy</a>
-    <a href="https://www.google.com/intl/en/policies/terms/">Terms</a>
+    <img src="thumbnails/download.png" />
+
+    These folders correspond to the annotation categories high-quality (2000 ROIs), 
+    scribble (2000 ROIs), and no annotation (5880 ROIs), respectively. In the second level, 
+    the folders included data pertaining to a specific geographic location (ROI). The folder name 
+    is the ROI ID. Since an ROI consists of five IPs at different  cloud cover, each ROI folder 
+    is subdivided into five folders whose names match the GEE Sentinel-2 product ID of the 
+    specific IP.
+
   </div>
 </div>
