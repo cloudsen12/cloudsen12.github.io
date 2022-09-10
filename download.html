@@ -44,22 +44,32 @@ limitations under the License.
 
 <div class=alt-content>
 <div class=section>
-<h3>Download (v1.0)</h3>
+<h3>About</h3>
 <div class=textblock>
-<p>
-CloudSEN12 can be downloaded here: <a href="https://doi.org/10.34911/rdnt.y3xeg3">https://doi.org/10.34911/rdnt.y3xeg3.</a>
 
 <p>
 The dataset is delivered in the form of LZW-compressed COG (<a href="https://www.cogeo.org/">Cloud Optimized GeoTIFF</a>) 
-files using the <a href="https://stacspec.org/en"> STAC specification</a>. 
-<br><br>
-STAC provides a straightforward architecture 
-for reading metadata and assets in JSON format, providing users with a sophisticated browsing experience 
-that seamlessly integrates with modern scripting languages and front-end web technologies. This data is 
-licensed by CloudSEN12 team under a <a href="http://creativecommons.org/licenses/by/4.0/">
-Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0).</a>
+files using the <a href="https://stacspec.org/en"> STAC specification</a>. STAC provides a straightforward architecture 
+for reading metadata and assets in JSON format, providing users with a sophisticated browsing experience that seamlessly
+integrates with modern scripting languages and front-end web technologies. However, it is also possible to download the
+dataset directly from Google Drive using this link: <a href="https://shorturl.at/cgjtz">https://shorturl.at/cgjtz</a>.
+</p>
+
 </div>
 </div>
+
+
+<div class=section>
+    <h3>Examples</h3>
+    <div class=textblock>
+        We provide some examples of how to use the dataset:
+        <ol> <b>Colab notebook 01: </b> <a href="https://colab.research.google.com/drive/1veml5tlY4plyKSVKzqxcEyLb_eWr8Ci6?usp=sharing">Download CloudSEN12 using easystac</a> </ol>
+        <ol> <b>Colab notebook 02: </b> <a href="https://colab.research.google.com/drive/1DA7jV-S9vB7Vrmv1LJJP6bJyJYHjmjyS?usp=sharing">Make a prediction using UnetMobV2</a> </ol>
+        <ol> <b>Colab notebook 03: </b> <a href="https://colab.research.google.com/drive/1KtQzVmrj9t7ZTMF87PI8csRrFP7caLHW?usp=sharing">Train a DL model using CloudSEN12 and PyTorch Lightning</a> </ol>
+        <ol> <b>Colab notebook 04: </b> <a href="https://colab.research.google.com/drive/1oecUts2oKi9J4M4VMPN6rF_-B-w9h2lg?usp=sharing">Visualize CloudSEN12 in Google Earth Engine</a> </ol>
+    </div>
+</div>
+    
 
 <div class=section>
   <h3>Dataset Design</h3>
@@ -77,6 +87,9 @@ Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0).</a>
     is the ROI ID. Since an ROI consists of five IPs at different  cloud cover, each ROI folder 
     is subdivided into five folders whose names match the GEE Sentinel-2 product ID of the 
     specific IP.
-
+    <br><br>
+    This data is licensed by CloudSEN12 team under
+    a <a href="http://creativecommons.org/licenses/by/4.0/"> Creative Commons Attribution-NonCommercial 4.0 International 
+    (CC BY-NC 4.0).</a>
   </div>
 </div>
