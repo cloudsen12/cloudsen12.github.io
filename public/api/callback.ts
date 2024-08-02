@@ -1,0 +1,1 @@
+// export { callback as default } from '@openlab/vercel--cms-github'

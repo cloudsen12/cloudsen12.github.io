@@ -1,0 +1,505 @@
+---
+import ConditionalLoading from "@partials/ConditionalLoading.svelte";
+import Title from "@components/Title.svelte";
+import Button from "@components/Button.svelte";
+import Form from "@components/Form.svelte";
+import Blobs from "@components/Blobs.svelte";
+import ProjectPreview from "@components/ProjectPreview.astro";
+import BlogPreview from "@components/BlogPreview.astro";
+import Markdown from "@astrojs/markdown-component";
+import { getTranslations, getLocaleFromURL } from "@lib/translations";
+
+const { post } = Astro.props;
+
+const locale = getLocaleFromURL(Astro.url);
+
+const projects = await Astro.glob("../../_data/content/projects/*.md");
+const projectsData = await getTranslations({
+  posts: projects,
+});
+const sortedProjects = Object.values(projectsData).sort(
+  (a, b) =>
+    new Date(b[locale].date).valueOf() - new Date(a[locale].date).valueOf()
+);
+const selectedProjects = Object.values(sortedProjects).slice(
+  0,
+  post.projects.postsNum
+);
+const moreProjectsLink = "/" + locale + "/blog/page/1";
+
+const posts = await Astro.glob("../../_data/content/blog/*.md");
+const postsData = await getTranslations({
+  posts: posts,
+});
+const sortedPosts = Object.values(postsData).sort(
+  (a, b) =>
+    new Date(b[locale].date).valueOf() - new Date(a[locale].date).valueOf()
+);
+const selectedPosts = Object.values(sortedPosts).slice(0, post.blog.postsNum);
+
+const heroImages = post.hero.images;
+
+const heroImage = post.hero.images[0];
+---
+
+<script>
+  import Chart from "chart.js/auto";
+
+  // Define the data
+  var dataset = {
+      labels: [
+        "Human Level", "Baseline*", "KappaMask L2A", 
+        "Google SC+", "Fmask", "s2cloudless", "Sen2Cor", 
+        "CD-FCNN", "QA60"
+      ],
+      datasets: [
+        {
+          label: "balanced_accuracy_score",
+          data: [0.99, 0.94, 0.86, 0.86, 0.80, 0.76, 0.72, 0.70, 0.62],      
+          borderWidth: 1,
+          borderColor: ['black', 'black', 'black', 'black', 'black', 'black', 'black', 'black', 'black'],
+          backgroundColor: ['#D32F2F', '#FFA000', '#1976D2', '#1976D2', '#1976D2', '#1976D2', '#1976D2', '#1976D2', '#1976D2'],
+        },
+      ],
+  }
+
+  // Define the chart
+  document.addEventListener("DOMContentLoaded", function () {
+    const ctx = document.getElementById("myChart");
+    if (ctx instanceof HTMLCanvasElement) {
+      new Chart(ctx, {
+        type: "bar",
+        data: dataset,
+        options: {
+          indexAxis: 'y',
+          elements: {
+            bar: {
+                borderWidth: 2,
+            }
+          },
+          scales: {
+            x: {
+              beginAtZero: false,
+              min: 0.6,
+              title: {
+                display: true,
+                text: '*The baseline is a U-Net with MobileNetV2 encoder trained on CloudSEN12+ dataset.',
+                color: '#000000',
+                font: {
+                  size: 16,
+                  weight: 'normal'
+                }
+              },
+              grid: {
+                display: true,
+              },
+              ticks: {
+                color: "#00000",
+                font: {
+                  size: 15,
+                  weight: 'bold'
+                },
+              }
+            },
+            y: {
+              grid: {
+                display: true,
+              },
+              ticks: {
+                color: "#00000",
+                font: {
+                  size: 15,
+                  weight: 'bold'
+                },
+              },
+            },
+          },
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'none',
+            },
+            title: {
+              display: true,
+              text: 'Balanced Accuracy Score',
+              font: {
+                size: 20,
+                color: '#FFFFFF'
+              }
+            },
+            subtitle: {
+              display: true,
+              text: 'clouds and cloud shadow are grouped into broader categories',
+              font: {
+                size: 16,
+                color: '#FFFFFF'
+              }
+            }
+          }
+        },
+      });
+      Chart.defaults.color = "#000000";
+      Chart.defaults.font.family = "Montserrat";
+    } else {
+      console.error("Elemento con ID 'myChart' no es un canvas");
+    }
+  });
+
+</script>
+
+<ConditionalLoading load={post.hero.active}>
+  <section
+    id="hero"
+    class="anchor xl:container mx-auto px-6 flex items-center h-screen lg:min-h-[750px] max-h-[1400px] relative"
+  >
+    <br />
+    <div class="flex items-start">
+      <div class="w-full h-auto md:w-8/12 lg:w-6/12 space-y-8 z-20 content__hero">
+        <div>
+          <div class="text-2xl xl:text-3xl dark:text-white">
+            {post.hero.tagline}
+          </div>
+          <h2
+            class="text-4xl sm:text-5xl lg:text-5xl xl:text-5xl 2xl:text-7xl font-bold !leading-1 dark:text-white"
+          >
+            <Markdown content={post.hero.mainTagline} />
+          </h2>
+        </div>
+        <div class="text-xl lg:text-2xl dark:text-white">
+          {post.hero.description}
+        </div>
+        <div class="lg:flex lg:space-x-6 space-y-6 lg:space-y-0">
+          {
+            post.hero.buttons.map((button) => (
+              <Button type="a" style={button.type} link={button.link}>
+                {button.label}
+              </Button>
+            ))
+          }
+        </div>
+  
+        <div
+          class="text-xl lg:text-2xl dark:text-white flex flex-wrap gap-2 change-color"
+        >
+          <a href="https://github.com/cloudsen12/" target="_blank">
+            <img
+              style="width:6rem;"
+              loading="lazy"
+              class="inline-block mr-8 dark:invert"
+              src="../assets/logo-github-contacto.svg"
+              alt="Github logo"
+            />
+          </a>
+  
+          <a
+            href="https://huggingface.co/datasets/isp-uv-es/CloudSEN12Plus"
+            target="_blank"
+          >
+            <img
+              style="width:7rem;"
+              loading="lazy"
+              class="inline-block mr-8"
+              src="../assets/logo-huggingface-banner.svg"
+              alt="Huggingface logo"
+            />
+          </a>
+  
+          <a
+            href="https://www.scidb.cn/en/detail?dataSetId=2036f4657b094edfbb099053d6024b08&version=V1"
+            target="_blank"
+          >
+            <img
+              loading="lazy"
+              class="inline-block dark:invert"
+              src="../assets/sdb.webp"
+              alt="Linkedin logo"
+            />
+          </a>
+        </div>
+      </div>
+      <div class="w-full right-0 h-auto flex items md:w-8/12 lg:w-6/12 absolute inline-block">
+        <div class="absolute w-full flex justify-end items-center canva__content z-10 inline-block mr-8 dark:invert">
+          <canvas id="myChart"></canvas>
+        </div>
+        <Blobs />
+      </div>
+    </div>
+    <!-- <div class="w-full h-full right-0 md:w-8/12 lg:w-6/12 absolute">
+      <div
+        id="hero-image"
+        class="absolute w-full h-full flex justify-end items-center z-10"
+      >
+        <noscript>
+          <img
+            class="mr-6 w-10/12 h-4/5 object-contain object-center opacity-20 lg:opacity-100 dark:invert dark:opacity-20 lg:dark:opacity-70"
+            src={heroImage}
+            alt="An old style anatomycal illustration of a brain, a heart or a hand"
+          />
+        </noscript>
+      </div>
+      <Blobs />
+    </div> -->
+  </section>
+</ConditionalLoading>
+
+<ConditionalLoading load={post.about.active}>
+  <section
+    id="about"
+    class="anchor py-16 relative overflow-hidden xl:overflow-visible"
+  >
+    <div class="xl:container mx-auto px-6">
+      <div class="w-full space-y-8 z-10">
+        <Title>
+          <Fragment slot="title">{post.about.title}</Fragment>
+          <Fragment slot="subtitle">{post.about.description}</Fragment>
+        </Title>
+        <div class="flex flex-wrap justify-center">
+          <div class="w-8/12 lg:w-4/12 space-y-8 z-10 relative mb-8">
+            <img
+              loading="lazy"
+              class="relative object-cover w-full aspect-square overflow-hidden rounded-full z-10 dark:invert"
+              src={post.about.image}
+              alt="My picture"
+            />
+            <Blobs />
+          </div>
+          <div class="hidden lg:block lg:w-1/12 relative"></div>
+          <div
+            class="w-full lg:w-6/12 space-y-4 relative dark:text-white z-10"
+            data-format-text
+          >
+            <Markdown content={post.about.text} />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</ConditionalLoading>
+
+<ConditionalLoading load={post.projects.active}>
+  <section
+    id="projects"
+    class="anchor py-16 overflow-hidden xl:overflow-visible"
+  >
+    <div class="absolute w-5/12 h-1/3 right-0 bottom-1/3 hidden lg:block">
+      <Blobs />
+    </div>
+    <div class="xl:container mx-auto px-6 relative z-10">
+      <div class="w-full space-y-8 z-10">
+        <Title>
+          <Fragment slot="title">{post.projects.title}</Fragment>
+          <Fragment slot="subtitle">{post.projects.description}</Fragment>
+        </Title>
+      </div>
+    </div>
+    <div class="projects__main xl:container mx-auto relative">
+      <button class="left-1 arrow__p left__project dark:text-white" aria-label="Anterior proyecto">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="40"
+          height="40"
+          viewBox="0 0 24 24"
+          style="fill: currentColor ;transform: ;msFilter:;"
+          ><path
+            d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"
+          ></path>
+        </svg>
+      </button>
+      <div
+        class="projects__container px-6 scroll-px-6 relative gap-8 flex flex-nowrap overflow-x-auto lg:overflow-visible lg:grid lg:grid-cols-3 z-10 snap-x"
+        data-scroll
+      >
+        {
+          selectedProjects.map((project) => (
+            <ProjectPreview project={project[locale]} />
+          ))
+        }
+      </div>
+      <button class="arrow__p right__project dark:text-white" aria-label="Siguiente proyecto">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="40"
+          height="40"
+          viewBox="0 0 24 24"
+          style="fill: currentColor;transform: ;msFilter:;"
+          ><path
+            d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"
+          ></path>
+        </svg>
+      </button>
+    </div>
+  </section>
+</ConditionalLoading>
+
+<ConditionalLoading load={post.blog.active}>
+  <section id="ideas" class="anchor py-16 relative">
+    <div class="blobs absolute w-6/12 h-1/3 left-0 bottom-1/3 hidden lg:block">
+      <Blobs />
+    </div>
+    <div class="xl:container mx-auto px-6 relative z-10">
+      <div class="w-full space-y-8 z-10">
+        <Title>
+          <Fragment slot="title">{post.blog.title}</Fragment>
+          <Fragment slot="subtitle">{post.blog.description}</Fragment>
+        </Title>
+      </div>
+    </div>
+    <div
+      class="xl:container px-6 scroll-px-6 mx-auto relative gap-8 flex flex-nowrap overflow-x-auto lg:overflow-visible lg:grid lg:grid-cols-4 z-10 snap-x"
+      data-scroll
+      style="overflow: auto;"
+    >
+      {selectedPosts.map((post) => <BlogPreview post={post[locale]} />)}
+    </div>
+
+    <div
+      class="more__blogs xl:container mx-auto px-6 relative z-10 text-right font-medium text-lg"
+    >
+      <a
+        class="after:content-[''] after:w-5 after:h-5 after:bg-[url(/assets/icon-arrow-top.svg)] after:bg-no-repeat after:bg-right-top after:inline-block after:dark:invert after:relative after:top-1 text-with-color-style"
+        href={moreProjectsLink}>{post.blog.seeMore}</a
+      >
+    </div>
+  </section>
+</ConditionalLoading>
+
+<ConditionalLoading load={post.contact.active}>
+  <section id="contact" class="anchor py-16 relative">
+    <div class="xl:container mx-auto px-6 relative z-10">
+      <div class="w-full space-y-8 z-10">
+        <Title>
+          <Fragment slot="title">{post.contact.title}</Fragment>
+          <Fragment slot="subtitle">{post.contact.description}</Fragment>
+        </Title>
+      </div>
+    </div>
+    <div
+      class="xl:container mx-auto px-6 flex flex-wrap lg:flex-nowrap gap-8 relative z-10"
+    >
+      <div class="w-full lg:w-6/12">
+        <Form {locale} client:visible />
+      </div>
+      <div class="w-full lg:w-6/12 space-y-4 lg:pt-12 lg:pl-8 dark:text-white">
+        {
+          post.contact.contactMethods.map((contactMethod) => (
+            <a class="block w-fit" href={contactMethod.url}>
+              <img
+                loading="lazy"
+                class="icons_contacto w-5 h-5 inline-block mr-1 dark:invert"
+                src={contactMethod.icon}
+                alt={"Icon for " + contactMethod.label}
+              />
+              <div class="inline-block">{contactMethod.label}</div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+  <style>
+    .more__blogs:hover {
+      font-size: 1.23rem;
+    }
+    .more__blogs {
+      font-size: 1.2rem;
+      transition: 0.3s ease all;
+      font-weight: 600;
+    }
+    [data-style="Primary"] {
+      @apply bg-[rgba(var(--primaryColor),0.8)] hover:bg-[rgba(var(--primaryColor),1)];
+    }
+    .text-with-color-style {
+      @apply text-[rgba(var(--primaryColor),0.8)];
+    }
+    .right__project {
+      right: -2.5rem;
+    }
+    .left__project {
+      left: -2rem;
+    }
+    .arrow__p {
+      z-index: 100;
+      position: absolute;
+      font-size: 4rem;
+      top: 35%;
+    }
+    .projects__main {
+      width: 93%;
+    }
+    .projects__container {
+      width: 100%;
+      display: flex;
+      flex-wrap: nowrap;
+      overflow: auto;
+      scroll-behavior: smooth;
+    }
+    @media (max-width: 680px) {
+      .right__project {
+        right: -1rem;
+      }
+      .left__project {
+        left: -1rem;
+      }
+      .projects__main {
+        width: 88%;
+      }
+    }
+    @media (max-width: 768px) {
+      #hero {
+        height: auto;
+        padding: 0 auto !important;
+      }
+      .content__hero {
+        margin-top: 6rem;
+      }
+    }
+  </style>
+  <script>
+    const images = document.querySelectorAll(".icons_contacto");
+
+    // Verificar si hay al menos tres imágenes
+    if (images.length >= 3) {
+      // Quitar la clase 'dark:invert' de la tercera imagen
+      images[2].classList.remove("dark:invert");
+    }
+    let projectContent = document.querySelector(
+        ".projects__container"
+      ) as HTMLElement,
+      leftP = document.querySelector(".left__project") as HTMLElement,
+      rightP = document.querySelector(".right__project") as HTMLElement;
+
+    rightP.addEventListener("click", () => {
+      projectContent.scrollLeft += projectContent.offsetWidth;
+    });
+
+    leftP.addEventListener("click", () => {
+      projectContent.scrollLeft -= projectContent.offsetWidth;
+    });
+  </script>
+  <script define:vars={{ heroImages }}>
+    const randomImage = Math.floor(Math.random() * heroImages.length);
+    const selectedImage = heroImages[randomImage];
+    let heroImage = document.getElementById("hero-image");
+    heroImage.innerHTML =
+      '<img id="hero-image" class="mr-6 w-10/12 h-4/5 object-contain object-center opacity-20 lg:opacity-100 dark:invert dark:opacity-20 lg:dark:opacity-70 max-w-[750px]" src="' +
+      selectedImage +
+      '" alt="An old style anatomycal illustration of a brain, a heart or a hand">';
+  </script>
+</ConditionalLoading>
+
+<style>
+  @media(max-width:760px){
+    .canva__content{
+      display: none;
+    }
+    
+  }
+  .canva__content {
+    width: 100%;
+    height: 25rem;
+  }
+  .canva__content canvas{
+    width: 100%;
+    height: 100%;
+  }
+</style>

@@ -1,0 +1,53 @@
+{
+  "en": {
+    "footertext": "This website was inspired by and modified from",
+    "buildTools": [
+      {
+        "logo": "https://res.cloudinary.com/ppkehl/image/upload/v1657591669/icons/astro-logo-bw_qjkufv_pmbpcg.svg",
+        "label": "Build with Astro",
+        "url": "https://astro.build/"
+      },
+      {
+        "logo": "https://res.cloudinary.com/ppkehl/image/upload/v1657571953/icons/svelte-plain_wxzbvt.svg",
+        "label": "Components by Svelte",
+        "url": "https://svelte.dev/"
+      },
+      {
+        "logo": "https://res.cloudinary.com/ppkehl/image/upload/v1657572070/icons/logo-tailwind_iziq1i.svg",
+        "label": "CSS by Tailwind CSS",
+        "url": "https://tailwindcss.com/"
+      },
+      {
+        "logo": "https://res.cloudinary.com/ppkehl/image/upload/v1657591338/icons/logo-github_o8nj8f_ltj0dc.svg",
+        "label": "Source code on GitHub",
+        "url": "https://github.com/"
+      }
+    ]
+  },
+  "es": {
+    "footertext": "Este sitio web fue inspirado y modificado de",
+    "buildTools": [
+      {
+        "label": "Feito com Astro",
+        "logo": "https://res.cloudinary.com/ppkehl/image/upload/v1657591669/icons/astro-logo-bw_qjkufv_pmbpcg.svg",
+        "url": "https://astro.build/"
+      },
+      {
+        "label": "Componentes com Svelte",
+        "logo": "https://res.cloudinary.com/ppkehl/image/upload/v1657571953/icons/svelte-plain_wxzbvt.svg",
+        "url": "https://svelte.dev/"
+      },
+      {
+        "label": "CSS com Tailwind CSS",
+        "logo": "https://res.cloudinary.com/ppkehl/image/upload/v1657572070/icons/logo-tailwind_iziq1i.svg",
+        "url": "https://tailwindcss.com/"
+      },
+      {
+        "label": "Código fonte no GitHub",
+        "logo": "https://res.cloudinary.com/ppkehl/image/upload/v1657591338/icons/logo-github_o8nj8f_ltj0dc.svg",
+        "url": "https://github.com/"
+      }
+     
+    ]
+  }
+}

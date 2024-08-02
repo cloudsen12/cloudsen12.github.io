@@ -1,0 +1,16 @@
+{
+  "en": {
+    "title": "CloudSEN12",
+    "description": "CloudSEN12 offers the most comprehensive collection for cloud and cloud shadow detection in Sentinel-2.",
+    "image": "/assets/logo.png",
+    "analytics": "G-1067M8P85L",
+    "web3Forms": "eea54e7a-f277-4727-ba78-b2f4778771f6"
+  },
+  "es": {
+    "title": "CloudSEN12",
+    "description": "CloudSEN12 ofrece la colección más completa para la detección de nubes y sombras de nubes en Sentinel-2..",
+    "image": "/assets/logo.png",
+    "analytics": "G-1067M8P85L",
+    "web3Forms": "eea54e7a-f277-4727-ba78-b2f4778771f6"
+  }
+}

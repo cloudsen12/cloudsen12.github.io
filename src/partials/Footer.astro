@@ -1,0 +1,23 @@
+---
+import footer from "../../_data/settings/menuFooter.json"
+
+const { locale } = Astro.props;
+const { post } = Astro.props;
+
+const localizedFooterBuildTools = footer[locale]['buildTools']
+
+---
+
+<footer class="xl:container pt-12 flex justify-center items-center flex-col mx-auto p-6 flex-shrink-0 overflow-hidden">
+  <div class="flex flex-wrap space-x-3 justify-center lg:justify-start">
+    {localizedFooterBuildTools.map((localizedFooterBuildTool) =>
+    <div class="aspect-square w-8 m-2 md:m-0 block relative before:content-[attr(data-tip)] before:opacity-0 before:transition-all before:block before:absolute before:py-2 before:px-2 before:bg-white before:bottom-12 before:whitespace-nowrap before:rounded before:-left-2 before:uppercase before:text-xs before:font-semibold after:content[''] after:opacity-0 after:block after:absolute after:w-0 after:h-0 after:border-l-8 after:border-l-transparent after:border-r-8 after:border-r-transparent after:border-t-8 ">
+      <a href={localizedFooterBuildTool.url}>
+        <img loading="lazy" class="w-full h-full object-contain object-center dark:invert"
+          src={localizedFooterBuildTool.logo}alt={localizedFooterBuildTool.label} />
+      </a>
+    </div>
+  )}
+  </div> 
+  <p class="dark:text-white mt-2">{ footer[locale].footertext} <a style="text-decoration: underline;" href="https://github.com/ppkehl/pedrokehl-2022">Pedro Kehl</a></p>
+</footer>

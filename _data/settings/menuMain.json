@@ -1,0 +1,50 @@
+{
+  "en": {
+    "mainMenu": [
+      {
+        "title": "About us",
+        "description": "",
+        "url": "#about"
+      },
+      {
+        "title": "Examples",
+        "description": "",
+        "url": "#projects"
+      },
+      {
+        "title": "Blog",
+        "description": "",
+        "url": "#ideas"
+      },
+      {
+        "title": "Contact us",
+        "description": "",
+        "url": "#contact"
+      }
+    ]
+  },
+  "es": {
+    "mainMenu": [
+      {
+        "title": "Nosotros",
+        "description": "",
+        "url": "es/#about"
+      },
+      {
+        "title": "Ejemplos",
+        "description": "",
+        "url": "es/#projects"
+      },
+      {
+        "title": "Blog",
+        "description": "",
+        "url": "es/#ideas"
+      },
+      {
+        "title": "Escríbenos",
+        "description": "",
+        "url": "es/#contact"
+      }
+    ]
+  }
+}

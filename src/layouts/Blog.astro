@@ -1,0 +1,28 @@
+---
+import BlogImage from '@components/BlogImage.svelte'
+import BlogDescription from '@components/BlogDescription.svelte'
+import { formatDate } from '@lib/utils'
+import { getLocaleFromURL } from '@lib/translations';
+const locale = getLocaleFromURL(Astro.url);
+
+const { post } = Astro.props;
+const postDate = formatDate(post.date)
+const moreProjectsLink = "/" + locale + "/blog/page/1";
+---
+
+<div class="post container mx-auto dark:text-white py-24 lg:pt-40 lg:pb-20 px-6 flex">
+  <div class="hidden lg:block lg:w-2/12 xl:w-3/12 pr-9 sticky top-0 ">
+    <BlogImage featuredImage={post.featuredImage} />
+  </div>
+  <div class="w-full lg:w-8/12 xl:w-6/12 leading-normal" data-format-text>
+    <a href={moreProjectsLink}>
+      <h1 class="text-4xl font-bold dark:text-white">
+        <Fragment set:html={post.title} />
+      </h1>
+    </a>
+    <div>{postDate}</div>
+    <BlogDescription description={post.description} />
+    <Fragment set:html={post.body} />
+    <div class="clear-both w-full"></div>
+  </div>
+</div>

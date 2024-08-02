@@ -1,0 +1,33 @@
+---
+import Base from '@partials/Base.astro'
+import Blog from '@layouts/Blog.astro'
+import { getTranslations } from '@lib/translations';
+
+// Data Fetching API
+export async function getStaticPaths() {
+  const posts = await Astro.glob('../../../../_data/content/blog/*.md')
+  const postsData = await getTranslations({
+    "posts": posts
+  })
+  return Object.values(postsData).map((postGroup) => {
+    return Object.values(postGroup).map((post) => {
+      return {
+        params: {
+          locale: post.locale,
+          slug: post.slug
+        },
+        props: {
+          post
+        }
+      }
+    })
+  })
+}
+const { post } = Astro.props;
+---
+
+<Base translationsURL={post.translations}>
+
+  <Blog post={post} />
+
+</Base>

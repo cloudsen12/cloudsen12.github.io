@@ -1,0 +1,63 @@
+---
+import Base from '@partials/Base.astro'
+import BlogPreviewHorizontal from '@components/BlogPreviewHorizontal.astro'
+import { getTranslations } from '@lib/translations';
+import { generateTagData } from "@lib/utils";
+
+export async function getStaticPaths() {
+
+  // Data Fetching API
+  const allPosts = await Astro.glob('../../../../../_data/content/blog/*.md')
+  const allPostsData = await getTranslations({
+    "posts": allPosts
+  })
+
+  // Get all tags by locale
+  const localizedTags = new Array();
+  Object.values(allPostsData).map((post) => {
+    Object.entries(post).map(([locale, content]) => {
+      Object.values(content.tags).map((tag) => {
+        if(!localizedTags.hasOwnProperty(locale)){
+          localizedTags[locale] = new Set();
+        } 
+        localizedTags[locale].add(tag)
+      })
+    })
+  })
+  
+  // Add name and slug for each tag
+  const processedTags = generateTagData(localizedTags);
+
+  // Cycle tags by locale
+  return Object.entries(processedTags).map(([locale, tags]) => {
+    return Object.values(tags).map((tag) => {
+
+      const localizedPosts = Object.values(allPostsData).map((postGroup) => {return Object.values(postGroup).filter((post) => post.locale === locale)})
+      const localizedPostsFlat = localizedPosts.flat(Infinity)
+      const filteredPosts = Object.values(localizedPostsFlat).filter((post) => post.tags.includes(tag.name))
+      return {
+        params: {
+          locale: locale,
+          tag: tag.slug
+        },
+        props: {
+          posts: filteredPosts
+        }
+      }
+    })
+  })
+}
+const { posts } = Astro.props
+---
+
+<Base translationsURL>
+
+  <section id="ideas" class="anchor py-32 relative">
+
+    <div class="lg:container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 px-6">
+      { Object.values(posts).map((post) => <BlogPreviewHorizontal post={post} /> ) }
+    </div>
+
+  </section>
+
+</Base>

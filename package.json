@@ -1,0 +1,26 @@
+{
+  "name": "@pedrokehl/portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "devDependencies": {
+    "@astrojs/image": "^0.3.2",
+    "@astrojs/partytown": "^1.0.0",
+    "@astrojs/preact": "^1.0.0",
+    "@astrojs/sitemap": "^1.0.0",
+    "@astrojs/svelte": "^1.0.0",
+    "@astrojs/tailwind": "^1.0.0",
+    "astro": "^1.9.2",
+    "sass": "^1.54.3",
+    "svelte": "^3.49.0"
+  },
+  "dependencies": {
+    "@astrojs/markdown-component": "^1.0.0",
+    "chart.js": "^4.4.2"
+  }
+}

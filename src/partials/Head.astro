@@ -1,0 +1,47 @@
+---
+const { title, description = '', analytics, coverUrl } = Astro.props;
+const canonicalUrl = Astro.url.href;
+const gaUrl = `https://www.googletagmanager.com/gtag/js?id=${analytics}`;
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+{description && <meta name="description" content={description} />}
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo.webp">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/logo.webp">
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<!-- Mastodon Check -->
+<a rel="me" href="https://techhub.social/@ppkehl"></a>
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={title} />
+{description && <meta property="og:description" content={description} />}
+<meta property="og:image" content={coverUrl} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalUrl} />
+<meta property="twitter:title" content={title} />
+{description && <meta property="twitter:description" content={description} />}
+<meta property="twitter:image" content={coverUrl} />
+
+<!-- Analytics -->
+<script type="text/partytown" src={gaUrl}></script>
+<script type="text/partytown" define:vars={{ analyticsId: analytics }}>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', analyticsId);
+</script>

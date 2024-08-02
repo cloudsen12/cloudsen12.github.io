@@ -1,0 +1,28 @@
+---
+const { project } = Astro.props;
+const projectURL = project.projectURL
+---
+
+<!-- <div class="w-4/5 sm:3/5 md:w-2/5 lg:w-auto flex-none mb-8 dark:text-white snap-start"> -->
+<div class="projects__content flex-none mb-8 dark:text-white snap-start">
+  <a href={projectURL} class="block space-y-5">
+    <div class="w-full aspect-square md:aspect-video rounded" >
+      <img loading="lazy" class="object-cover w-full h-full" src={project?.featuredImage} alt={project.title} data-tilt data-tilt-max="4" data-tilt-speed="500" data-tilt-perspective="500" data-tilt-reverse="true" data-tilt-gyroscope="false">
+    </div>
+    <h4 class="text-xl font-semibold">
+      {project?.title}
+    </h4>
+  </a>
+</div>
+<style>
+  .projects__content{
+    min-width: 32%;
+    width: 32%;
+  }
+  @media(max-width:680px){
+    .projects__content{
+      min-width: 100%;
+      width: 100%;
+    }
+  }
+</style>

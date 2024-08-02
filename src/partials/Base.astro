@@ -1,0 +1,91 @@
+---
+import Head from "./Head.astro"
+import Menu from "./Menu.svelte"
+import Logo from "./Logo.svelte"
+import Footer from "./Footer.astro"
+import ColorSchemes from "./ColorSchemes.astro"
+import ThemeToggle from "./ThemeToggle.svelte"
+import LanguageToggle from "./LanguageToggle.svelte"
+import { getLocaleFromURL, getDefaultLocale, getFilteredTranslations } from "../lib/translations"
+import settings from "../../_data/settings/generalSettings.json"
+import '../styles/global.scss';
+
+const path = Astro.url.href.toString().replace(/\/+$/, '')
+const locale = getLocaleFromURL(path);
+const homeLink = locale === getDefaultLocale() ? '/' :'/' + locale + '/';
+
+// Header Configs
+const title = settings[locale].title
+const description = settings[locale].description
+const coverUrl = settings[locale].image
+const analytics = settings[locale].analytics
+
+const { translationsURL } = Astro.props;
+const filteredTranslations = getFilteredTranslations(translationsURL, Astro.url.origin, Astro.url.href)
+---
+
+<html class="no-js scroll-smooth scroll-py-16 font-montserrat h-full min-w-full" lang={locale}>
+
+  <head>
+
+    <script type="text/javascript">
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+    </script>
+
+    <Head {title} {description} {analytics} {coverUrl}/>
+
+    <ColorSchemes />
+
+    <!-- Alternate lang paths -->
+    {Object.keys(filteredTranslations).map((key) =>
+      <link rel="alternate" hreflang={key} href={path + filteredTranslations[key]} />
+    )}
+    
+    
+  </head>
+
+  <body class="bg-gray-200 dark:bg-gray-900 mx-auto h-full w-full flex flex-col overflow-x-hidden">
+
+    <main class="flex-auto w-full">
+
+      <header class="z-50 fixed w-full top-0 left-0 before:content[''] before:w-full before:h-16 before:lg:h-24 before:absolute before:bg-gray-200 before:dark:bg-gray-900 before:backdrop-blur-xl before:dark:backdrop-blur-xl before:bg-opacity-70 before:dark:bg-opacity-50">
+        <div class="xl:container mx-auto px-6 h-16 lg:h-24">
+          <div class="h-full flex flex-wrap lg:flex-nowrap justify-between items-center">
+      
+            <Logo homeLink={homeLink}/>
+      
+            <div class="flex mr-12 lg:mr-0" style="margin-left: .5rem;">
+      
+              <LanguageToggle translationsURL={filteredTranslations}/>
+      
+              <ThemeToggle client:load />
+      
+            </div>
+      
+            <Menu locale={locale} client:idle />
+      
+          </div>
+        </div>
+      </header>
+
+      <slot />
+
+    </main>
+
+    <Footer locale={locale} />
+
+    <script is:inline>
+      document.documentElement.classList.remove('no-js');
+    </script>
+
+    <script src="/assets/vanilla-tilt.min.js" is:inline/>
+    
+    
+
+  </body>
+
+</html>

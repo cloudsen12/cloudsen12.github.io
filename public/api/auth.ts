@@ -1,0 +1,1 @@
+// export { auth as default } from '@openlab/vercel--cms-github'
