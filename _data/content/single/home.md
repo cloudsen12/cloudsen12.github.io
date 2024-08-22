@@ -19,7 +19,7 @@ en:
         link: https://ieeexplore.ieee.org/document/10282381
         type: Secondary
       - label: Paper 2024
-        link: https://ieeexplore.ieee.org/document/10282381
+        link: https://www.sciencedirect.com/science/article/pii/S2352340924008163
         type: Tertiary
 
 
@@ -33,7 +33,7 @@ en:
     title: About us
     description: 
     text: >-
-      The CloudSEN12 project started in Peru with the guidance of [**Z_GIS**](https://www.plus.ac.at/geoinformatik/?lang=en) and the [**ISP**](https://isp.uv.es/). This initiative addresses the challenge of processing cloud-contaminated imagery, focusing in Tropical regions, where existing cloud detection algorithms frequently underperform. We quickly identified that this shortcoming was due to the absence of a high-quality dataset. To address this issue, we decided to create a globally diverse dataset with a strong focus on quality, in order to improve  cloud detection capabilities. After the dataset’s release in December 2022 and receiving valuable feedback, the team was motivated to improve further. This led to **CloudSEN12+**, where, with the acquired knowledge, we refined the dataset ensuring maximum trustworthiness.
+      The CloudSEN12 project started in Peru with the guidance of [**Z_GIS**](https://www.plus.ac.at/geoinformatik/?lang=en) and the [**ISP**](https://isp.uv.es/). This initiative addresses the challenge of processing cloud-contaminated imagery, focusing on tropical regions where existing cloud detection algorithms frequently underperform. We quickly identified that this shortcoming was due to the absence of high-quality labels on this region. To address this issue, we decided to create a globally diverse dataset with a strong focus on quality to improve SOTA cloud detection capabilities. After the dataset’s release in December 2022 and receiving valuable feedback, the team was motivated to improve further. This led to **CloudSEN12+**, where, with the acquired knowledge, we refined the dataset ensuring maximum trustworthiness.
 
 
       **Mission:**
@@ -97,7 +97,7 @@ es:
         link: https://ieeexplore.ieee.org/document/10282381
         type: Secondary
       - label: Paper 2024
-        link: https://ieeexplore.ieee.org/document/10282381
+        link: https://www.sciencedirect.com/science/article/pii/S2352340924008163
         type: Secondary
     images:
       - /assets/heart.webp
@@ -109,7 +109,7 @@ es:
     title: Sobre nosotros
     description:
     text: >-
-      El proyecto CloudSEN12 se originó en Perú, bajo la guía de la Universidad de Salzburg, San Marcos, y Valencia. Surgió de la necesidad de abordar el desafío de trabajar con imágenes contaminadas por nubes en los Andes peruanos, donde los algoritmos de detección de nubes no funcionaban correctamente. Ante la falta de datasets adecuados para esta región, se decidió crear CloudSEN12,  un dataset distribuido globalmente. Tras el lanzamiento de este conjunto de datos en 2022 y recibir valiosos comentarios, nos sentimos inspirados para seguir mejorando. Así fue como nació CloudSEN12+, donde con el conocimiento adquirido, refinamos el dataset para ofrecer aun mas precisión y confiabilidad. 
+      El proyecto **CloudSEN12** comenzó en Perú con la orientación de [**Z_GIS**](https://www.plus.ac.at/geoinformatik/?lang=en) y el [**ISP**](https://isp.uv.es/). Esta iniciativa aborda el desafío de procesar imágenes contaminadas por nubes, centrándose en las regiones tropicales, donde los algoritmos existentes de detección de nubes a menudo tienen un rendimiento insuficiente. Identificamos rápidamente que esta deficiencia se debía a la falta de etiquetas de alta calidad en esta región. Para abordar este problema, decidimos crear un conjunto de datos globalmente diverso con un fuerte enfoque en la calidad para mejorar las capacidades de detección de nubes de última generación SOTA. Después del lanzamiento del conjunto de datos en diciembre de 2022 y al recibir valiosos comentarios, el equipo se motivó a mejorar aún más. Esto llevó a **CloudSEN12+**, donde, con el conocimiento adquirido, refinamos el conjunto de datos asegurando la máxima confiabilidad.
 
 
       **Misión:**
