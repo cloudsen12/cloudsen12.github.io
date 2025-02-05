@@ -76,7 +76,7 @@
 
 <form id="form-validate" class="w-full space-y-6" action="https://api.web3forms.com/submit" method="POST" novalidate>
 
-  <input type="hidden" name="access_key" value={settings[locale].web3Forms} />
+  <input type="hidden" name="access_key" value="2bd71768-da85-41b5-8b19-212aa4605ea1" />
   <input type="hidden" name="subject" value="New e-mail from pedrokehl.net"/>
   <label class="hidden">
     Hello
